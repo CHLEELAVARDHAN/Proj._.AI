@@ -1,0 +1,31 @@
+<!-- templates/ideas.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Your Idea</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-5">
+    <div class="container">
+        <h2>Submit Your Idea / Project</h2>
+        <form action="{{ url_for('ideas') }}" method="POST" class="mt-4">
+            <div class="mb-3">
+                <input type="text" name="idea" placeholder="Your Project / Idea" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <select name="sector" class="form-select" required>
+                    <option value="">Select Sector</option>
+                    <option value="AI/ML">AI/ML</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="UI/UX">UI/UX</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Get Recommendations</button>
+            <a href="{{ url_for('skills') }}" class="btn btn-secondary">Back to Skills Session</a>
+        </form>
+    </div>
+</body>
+</html>

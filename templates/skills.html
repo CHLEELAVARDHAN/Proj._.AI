@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Skill</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-5">
+  <div class="container">
+    <h2 class="mb-4">Choose Your Skill</h2>
+
+    <!-- Skill Input Form -->
+    <form method="POST" action="{{ url_for('skills') }}" class="mb-3">
+      <div class="input-group">
+        <input type="text" name="skill" class="form-control" placeholder="Enter your skill (e.g. Python, Java, Data Science etc.,)">
+        <button type="submit" class="btn btn-primary">Find Companies</button>
+      </div>
+    </form>
+
+    <h4>Or Quick Select:</h4>
+    <div class="d-flex flex-wrap gap-2 mt-2">
+      {% set all_skills = skills_data.keys() | list %}
+
+      {# Add Data Science only if not already present #}
+      {% if 'data science' not in all_skills %}
+        {% set all_skills = all_skills + ['data science'] %}
+      {% endif %}
+
+      {% for skill in all_skills %}
+        <form method="POST" action="{{ url_for('skills') }}">
+          <input type="hidden" name="skill" value="{{ skill }}">
+          <button type="submit" class="btn btn-outline-success">{{ skill|upper }}</button>
+        </form>
+      {% endfor %}
+    </div>
+
+    <hr class="my-4">
+    <a href="{{ url_for('welcome') }}" class="btn btn-secondary mt-4">⬅ Back to Home</a>
+    <a href="{{ url_for('ideas') }}" class="btn btn-info mt-4 ms-2">💡 Go to Ideas</a>
+  </div>
+
+  <script>
+    document.getElementById("resumeForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+
+      const res = await fetch("{{ url_for('check_resume') }}", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json();
+      const box = document.getElementById("feedbackBox");
+      box.classList.remove("d-none");
+      if (data.error) {
+        box.classList.replace("alert-info", "alert-danger");
+        box.innerText = data.error;
+      } else {
+        box.classList.replace("alert-danger", "alert-info");
+        box.innerText = JSON.stringify(data, null, 2);
+      }
+    });
+  </script>
+</body>
+</html>

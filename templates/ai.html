@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Recommendations</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/ai.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>💡 AI Idea Recommendations</h1>
+
+    <textarea id="ideaInput" placeholder="Enter your idea here..."></textarea>
+    <br>
+    <button id="recommendBtn">Get Recommendations</button>
+
+    <div id="loading" style="display:none;">⏳ Thinking...</div>
+    <div id="result"></div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/ai.js') }}"></script>
+</body>
+</html>

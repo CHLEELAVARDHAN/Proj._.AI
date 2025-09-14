@@ -1,0 +1,43 @@
+<!-- templates/feed.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Ideas Feed</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-5">
+    <div class="container">
+        <h2>Community Ideas Feed</h2>
+
+        {% if feed %}
+            {% for user, ideas in feed.items() %}
+                <h3>{{ user }}</h3>
+                <ul>
+                    {% for item in ideas %}
+                        <li>
+                            Idea: {{ item.idea }} | Sector: {{ item.sector }} | Language: {{ item.language }}
+                            <br>
+                            Comments:
+                            {% if item.comments %}
+                                <ul>
+                                    {% for c in item.comments %}
+                                        <li>{{ c }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                None
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        {% else %}
+            <p>No ideas submitted yet. Be the first one!</p>
+        {% endif %}
+
+        <a href="{{ url_for('ideas') }}" class="btn btn-primary mt-3">Submit New Idea</a>
+    </div>
+</body>
+</html>

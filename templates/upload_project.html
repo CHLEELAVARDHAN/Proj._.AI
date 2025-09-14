@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Project</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-5">
+  <div class="container">
+    <h2>Upload Your Project</h2>
+
+    <form action="{{ url_for('upload_project') }}" method="POST" enctype="multipart/form-data" class="mt-4">
+      <div class="mb-3">
+        <label for="project_files" class="form-label">Select Project Files (multiple allowed)</label>
+        <input type="file" class="form-control" name="project_files" id="project_files" multiple required>
+      </div>
+      <button type="submit" class="btn btn-success">Upload</button>
+      <a href="{{ url_for('welcome') }}" class="btn btn-secondary">Back</a>
+    </form>
+  </div>
+</body>
+</html>

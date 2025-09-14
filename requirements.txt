@@ -1,0 +1,7 @@
+flask
+pandas
+numpy
+scikit-learn
+requests
+firebase-admin
+python-dotenv

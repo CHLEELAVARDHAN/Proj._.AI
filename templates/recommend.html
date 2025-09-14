@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Recommendations</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      width: 500px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #007bff;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover { background: #0056b3; }
+    .result {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      background: silver;
+      white-space: pre-wrap;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Get AI Recommendations</h2>
+    <form id="recommendForm">
+      <textarea id="idea" placeholder="Enter your project idea..."></textarea>
+      <button type="submit">Get Recommendations</button>
+    </form>
+
+    <div class="result" id="result"></div>
+
+    <!-- Collaborate button -->
+<form id="collabForm" method="GET" action="/collaboration_form">
+  <input type="hidden" name="idea_id" id="collabId">
+  <input type="hidden" name="idea" id="collabIdea">
+  <input type="hidden" name="recommendations" id="collabRecs">
+  <button type="submit" class="btn btn-success" style="width:100%; margin-top:10px;">
+    Collaborate on this Idea
+  </button>
+</form>
+  </div>
+
+<script>
+document.getElementById("recommendForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const idea = document.getElementById("idea").value.trim();
+  if (!idea) { alert("Please enter your idea!"); return; }
+
+  const resultDiv = document.getElementById("result");
+  resultDiv.innerText = "Thinking...";
+
+  try {
+    const response = await fetch("/recommend", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idea })
+    });
+
+    const data = await response.json();
+resultDiv.innerText = data.recommendations || "No recommendations found!";
+resultDiv.scrollTop = 0;
+
+// Pass idea + recommendations + id to collaboration form
+  document.getElementById("collabIdea").value = idea;
+  document.getElementById("collabRecs").value = resultDiv.innerText;
+  document.getElementById("collabId").value = data.idea_id; 
+    } catch (err) {
+      resultDiv.innerText = "Error fetching recommendations!";
+    }
+  });
+</script>
+</body>
+</html>

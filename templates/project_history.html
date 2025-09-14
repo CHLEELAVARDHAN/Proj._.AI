@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Uploaded Projects History</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-5">
+    <div class="container">
+        <h2>🌍 Uploaded Projects History</h2>
+
+        {% if history %}
+            {% for proj in history %}
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-header">
+                        <strong>Uploaded by:</strong> {{ proj.user }}
+                        <span class="text-muted float-end">{{ proj.created_at }}</span>
+                    </div>
+                    <div class="card-body">
+                        <h5>Files:</h5>
+                        <ul class="list-group">
+                            {% for file in proj.files %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ file }}
+                                    <a href="{{ url_for('download_file', filename=file) }}" 
+                                       class="btn btn-sm btn-primary">Download</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted mt-3">No projects uploaded yet.</p>
+        {% endif %}
+
+        <a href="{{ url_for('welcome') }}" class="btn btn-secondary mt-4">Back to Welcome</a>
+    </div>
+</body>
+</html>
