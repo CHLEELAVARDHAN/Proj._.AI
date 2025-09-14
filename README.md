@@ -40,7 +40,7 @@ ProjAI/
 1. Clone this repository  
    ```bash
    git clone https://github.com/CHLEELAVARDHAN/Proj._.AI.git
-   cd ProjAI
+   cd Proj._.AI
 
 
 2. Install dependencies
