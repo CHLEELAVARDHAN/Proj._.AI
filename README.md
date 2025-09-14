@@ -39,7 +39,7 @@ ProjAI/
 ## 🚀 Installation & Usage
 1. Clone this repository  
    ```bash
-   git clone https://github.com/CHLEELAVARDHAN/ProjAI.git
+   git clone https://github.com/CHLEELAVARDHAN/Proj._.AI.git
    cd ProjAI
 
 
