@@ -5,11 +5,11 @@ An AI-powered web application that helps students and developers manage project 
 ---
 
 ## ✨ Features
-- ✅ Project idea generation based on user inputs  
-- ✅ Upload & manage project files  
-- ✅ Download AI recommendations (Word format)  
-- ✅ Maintain project upload history with clear option  
-- ✅ Simple UI built with Flask + Bootstrap  
+-  Project idea generation based on user inputs  
+-  Upload & manage project files  
+-  Download AI recommendations (Word format)  
+-  Maintain project upload history with clear option  
+-  Simple UI built with Flask + Bootstrap  
 
 ---
 
