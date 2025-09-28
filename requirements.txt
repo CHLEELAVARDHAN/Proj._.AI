@@ -1,7 +1,9 @@
 flask
 pandas
+werkzeug
 numpy
 scikit-learn
 requests
 firebase-admin
 python-dotenv
+python-docx
